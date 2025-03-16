@@ -8,17 +8,18 @@ namespace AdvertisingByDomain
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
             var services = builder.Services;
 
             // Add services to the container.
-
             services.AddControllers();
 
-            services.AddSingleton<DataDomainsRepository>(); // dal
-            services.AddTransient<DomainServices>();        // bll
+            // Добавить постоянно живущий класс с данными (in-memory collection)
+            services.AddSingleton<DomainRepository>();  // Слой доступа к данным
+            
+            // Добавить класс для парсинга данных
+            services.AddScoped<DomainServices>();       // Слой бизнес логики...
 
-            services.AddSwaggerGen();           
+            services.AddSwaggerGen();
             
             var app = builder.Build();
 
