@@ -41,24 +41,20 @@ AdvertisingByDomain - это проект тестового задания, а 
 Для удобства отладки и тестирования подключен Swagger UI.
 
 ## Как это запустить?
-Приложение написано на .NET 9.0. Никакой предварительной подготовки не трбуется, точка входа `Program.cs`.  \
-Запуск на Windows в MS VS, открыть файл решения `AdvertisingByDomain.sln`, и запустить стандартным способом. \
-Или запустить через командное окно:
+Приложение написано на .NET 9.0. Никакой предварительной подготовки не трбуется, точка входа `Program.cs`.
+В начале приложение надо собрать из исходников:
+
+    dotnet build AdvertisingByDomain.sln
+
+Потом запустить:
 
     dotnet AdvertisingByDomain.dll
 
-Перейти на страницу Swagger UI можно по ссылке:
+Перейти на страницу Swagger UI можно по ссылке [открыть Swagger UI приложения](http://localhost:5000/swagger/index.html "Прямая ссылка на ендпоинты приложения") :
 
     localhost:5000/swagger/index.html
 
-Запуск на Linux:
-
-    dotnet AdvertisingByDomain.dll
-
-Страница Swagger UI:
-
-    localhost:5000/swagger/index.html
-
+Запуск и сборка на Linux аналогичены.
 
 <br>
 <br>
