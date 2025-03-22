@@ -6,7 +6,7 @@ namespace DataAccessLayer
     public class DomainRepository
     {
         private readonly ILogger<DomainRepository> logger;
-        
+
         /// <summary>
         /// Корни дерева
         /// </summary>
@@ -15,7 +15,7 @@ namespace DataAccessLayer
         /// Результат поиска платформ по дереву
         /// </summary>
         private List<string> SearchResultPlatforms = new List<string>();
-        
+
         public DomainRepository(ILogger<DomainRepository> logger)
         {
             this.logger = logger;
@@ -67,11 +67,10 @@ namespace DataAccessLayer
                 return;
             }
 
-            Domain next;
             // Ключ объекта в словаре является именем домена по которому и происходит обращение.
-            if (domain.ChildDomains.ContainsKey(locations[layer]))
+            if (domain.ChildDomains.TryGetValue(locations[layer], out Domain? next))
             {
-                next = domain.ChildDomains[locations[layer]];
+                //next = domain.ChildDomains[locations[layer]];
                 AddPlatformOnLocation(platform, next, locations, layer);    // спускаемся на уровень ниже по дереву
             }
             else
@@ -118,11 +117,16 @@ namespace DataAccessLayer
                 return; // здесь мы возвращаем с самого нижнего уровня дерева, платформы
             }
 
-            if (domain.ChildDomains.ContainsKey(locations[layer]))
+            if (domain.ChildDomains.TryGetValue(locations[layer], out Domain? next))
             {
-                Domain next = domain.ChildDomains[locations[layer]];
                 GetPlatform(locations, next, layer);
             }
+
+            //if (domain.ChildDomains.ContainsKey(locations[layer]))
+            //{
+            //    Domain next = domain.ChildDomains[locations[layer]];
+            //    GetPlatform(locations, next, layer);
+            //}
         }
     }
 }
